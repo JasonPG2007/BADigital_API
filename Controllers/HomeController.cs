@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Models;
+using Repository;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,11 +10,18 @@ namespace BADigital_API.Controllers
     [ApiController]
     public class HomeController : ControllerBase
     {
+        private IServiceCateRepository serviceCateRepository;
+
+        public HomeController()
+        {
+            serviceCateRepository = new ServiceCateRepository();
+        }
+
         // GET: api/<HomeController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<ServiceCategory> Get()
         {
-            return new string[] { "value1", "value2" };
+            return serviceCateRepository.GetServiceCategories();
         }
 
         // GET api/<HomeController>/5
